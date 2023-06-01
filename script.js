@@ -8,21 +8,38 @@
 // va applicato uno sconto del 40% per gli over 65.
 // L'output del prezzo finale va messo fuori in forma umana (con massimo due decimali, per indicare centesimi sul prezzo). Questo richiederà un minimo di ricerca.
 
-// km da percorere
-const percorsoPasseggero = parseInt(
-  prompt("Distanza da percorrere da 1km a 100km")
-);
+//dati
+const prezzoKm = 0.21;
+
+// km da percorerre
+const percorsoPasseggero = parseFloat(prompt("Distanza da percorrere"));
+
 // età del passegero
 const etaPasseggero = prompt("Dimmi la tua eta");
+
 // prezzo base
-const prezzoBase = 0.21;
-// prezzo scontato
-let prezzoBiglietto = " ";
+const prezzoBase = percorsoPasseggero * prezzoKm;
+console.log(prezzoBase);
+
+// prezzo biglietto
+let prezzoSconto = 0;
 if (etaPasseggero < 18) {
-  prezzoBiglietto = percorsoPasseggero * prezzoBase * 0.8;
+  prezzoSconto = 20;
 } else if (etaPasseggero >= 65) {
-  prezzoBiglietto = percorsoPasseggero * prezzoBase * 0.6;
+  prezzoSconto = 40;
 } else {
-  prezzoBiglietto = percorsoPasseggero * prezzoBase;
+  prezzoBase;
 }
-alert(prezzoBiglietto.toFixed(2));
+console.log(prezzoSconto);
+
+//calcolo del prezzo scontato
+let prezzoFinale = prezzoBase - (prezzoBase * prezzoSconto) / 100;
+prezzoFinale = prezzoFinale.toFixed(2);
+console.log(prezzoFinale);
+
+document.getElementById(
+  "risultato"
+).innerHTML = `<h2> Il prezzo base e' ${prezzoBase.toFixed(2)} Euro</h2>
+<p> Lo sconto e' di ${prezzoSconto}% </p>
+<p>Prezzo per km e' ${prezzoKm} Euro</p>
+<h3>Il prezzo finale e' di ${prezzoFinale} Euro </h3>  `;
